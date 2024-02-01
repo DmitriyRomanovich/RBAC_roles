@@ -1,0 +1,24 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: write-deployment-insqa1-role 
+  namespace: insqa1
+rules:
+- apiGroups: ["*"]
+  resources: ["deployments"] ### Restrict access for deployment only
+  verbs: ["get","watch","list","patch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: insqa1-write-deployment
+  namespace: insqa1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: write-deployment-insqa1-role
+subjects:
+- kind: Group
+  namespace: insqa1
+  name: d1f1854a-da39-443a-b80e-7399cac29742

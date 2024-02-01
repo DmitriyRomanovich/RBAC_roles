@@ -1,0 +1,23 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-cpuat-role 
+  namespace: cpuat
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cpuat-rolebinding
+  namespace: cpuat
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-cpuat-role
+subjects:
+- kind: Group
+  namespace: cpuat
+  name: 763917f8-48fd-44e6-bb64-edc2641bff41

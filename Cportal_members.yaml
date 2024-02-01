@@ -1,0 +1,20 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-cportal-clusterrole 
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cportal-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: read-cportal-clusterrole
+subjects:
+- kind: Group
+  name: 989a70b0-6b9c-4e3d-96be-ec74bfeb3949

@@ -1,0 +1,23 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-rulesengine-role 
+  namespace: rulesengine
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: rulesengine-rolebinding
+  namespace: rulesengine
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-rulesengine-role
+subjects:
+- kind: Group
+  namespace: rulesengine
+  name: 9f8f6aac-3055-4dc9-bc17-b484d632cdce

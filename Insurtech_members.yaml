@@ -1,0 +1,20 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-insurtech-role 
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: insurtech-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: read-insurtech-role
+subjects:
+- kind: Group
+  name: d1f1854a-da39-443a-b80e-7399cac29741

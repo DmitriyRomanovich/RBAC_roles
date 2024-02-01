@@ -1,0 +1,181 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-dev-role 
+  namespace: dev
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-uat-role 
+  namespace: uat
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-qa1-role 
+  namespace: qa1
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-qa2-role 
+  namespace: qa2
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-automation-role 
+  namespace: automation
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-demo-role 
+  namespace: demo
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-tristar-role 
+  namespace: tristar
+rules:
+- apiGroups: ["*"]
+  resources: ["pods", "pods/log", "configmaps", "events", "nodes", services", "endpoints", "deployments"] ### Restrict access
+  verbs: ["get","watch","list"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: dev-rolebinding
+  namespace: dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-dev-role
+subjects:
+- kind: Group
+  namespace: dev
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: qa1-rolebinding
+  namespace: qa1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-qa1-role
+subjects:
+- kind: Group
+  namespace: qa1
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: qa2-rolebinding
+  namespace: qa2
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-qa2-role
+subjects:
+- kind: Group
+  namespace: qa2
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: uat-rolebinding
+  namespace: uat
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-uat-role
+subjects:
+- kind: Group
+  namespace: uat
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: demo-rolebinding
+  namespace: demo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-demo-role
+subjects:
+- kind: Group
+  namespace: demo
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tristar-rolebinding
+  namespace: tristar
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-tristar-role
+subjects:
+- kind: Group
+  namespace: tristar
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: automation-rolebinding
+  namespace: automation
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-automation-role
+subjects:
+- kind: Group
+  namespace: automation
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ingress-fin-rolebinding
+  namespace: ingress
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: read-ingress-role
+subjects:
+- kind: Group
+  namespace: ingress
+  name: cee53acb-63c5-4006-b8b7-6308cb15d3c0
